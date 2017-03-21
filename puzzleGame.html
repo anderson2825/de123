@@ -60,12 +60,12 @@ a{display:inline-block;padding:0 2%;border:1px solid #ccc;background-color:#e8e8
         正在播放: <strong id="rmusic">{{todos[this.index_m].text}}</strong>  
   </div>  
  <div  class="btn-group" id="ctrl_area">
-   <div id="btn-play"  @click="playm()" @touchstart="playm()"  :class="{backpos:mp3}" >
+   <div id="btn-play"  @click="playm()" :class="{backpos:mp3}" >
  
   </div>
-  <div id="btn-pre" @click="playprev()" >
+  <div id="btn-pre" @click="playadd(++index)" >
    </div>
-<div id="btn-next" @click="playnext()">
+<div id="btn-next" @click="playadd(--index)">
   
 </div>
  
