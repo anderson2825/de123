@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>puzzleGame</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+ 
+	<style>
+   *{margin:0;padding:0}
+　body{background-color:#e8e8e8;font:400 Helvetica,Arial,sans-serif;font-size:62.5%}
+#musicd{position:relative;display:block;margin-top:10px;padding:.5em 1em;border:1px solid #222;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;background-color:#333;background-image:-ms-linear-gradient(top,#444 0,#111 100%);background-image:-moz-linear-gradient(top,#444 0,#111 100%);background-image:-o-linear-gradient(top,#444 0,#111 100%);background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#444),color-stop(1,#111));background-image:-webkit-linear-gradient(top,#444 0,#111 100%);background-image:linear-gradient(to bottom,#444 0,#111 100%);-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 0 3px rgba(0,0,0,.5);-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 0 3px rgba(0,0,0,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 0 3px rgba(0,0,0,.5);font-size:12px}
+.mscBtn{display:inline-block;width:100%;color:#fff;font-size:1.2em}
+ #msc_list{display: none;}
+.btn-group{height:4.8em}
+.btn-group div{float:left;display:block;width:48px;height:48px;background-repeat:no-repeat;font-size:0;margin-left: 16.5%;}
+#btn-pre{background-image:url(puzzleGame/prevnext-48-48-0.png);background-position:left bottom}
+ 
+#btn-next{background-image:url(puzzleGame/prevnext-48-48-0.png);background-position:right bottom}
+.backpos{background-position:left bottom !important;}
+#btn-play{background-image:url(puzzleGame/playpause-48-48-0.png);background-position:right bottom}
+ 
+.m_name{height:20px;color:#fff;text-align: left;}
+#mcont{width: 100%;}
+#app{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:auto;padding:2% 2% 0 2%;max-width:640px;text-align:center}
+.box_box{display:inline-block;width:100%;vertical-align:middle;line-height:normal}
+.box{overflow:hidden;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:auto;margin-bottom:2%;border:1px solid #000}
+.original{display:inline-block;overflow:hidden;width:30%;border:1px solid #000}
+.opacity0{opacity:0!important;transition:all 10s linear}
+.original .item{border:none;opacity:1}
+.big{transform:scale(3);transform-origin:right bottom}
+.item{float:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding-top:33.333333%;width:33.333333%;border:1px solid #fff;background-size:cover;-webkit-background-size:cover}
+.noborder{border:none}
+.hui{background-color:#ccc}
+.qq{width:300px;height:300px}
+a{display:inline-block;padding:0 2%;border:1px solid #ccc;background-color:#e8e8e8;color:#000;text-decoration:none;line-height:20px}
+.num{display:inline-block;margin:0 4%;padding:0 2%;border:1px solid #ccc;line-height:20px}
+#mp3{position:fixed;top:.1em;right:.1em;z-index:999;display:block;padding:0;width:52px;height:52px;border:none;line-height:normal}
+
+		 
+	</style>
+</head>
+<body>
+	<div id="app" ref="app">
+		<div class="box_box">
+			<span v-text="bestTime"></span>
+			<div class="original" >
+				<div class="item" v-for="(item,index) in items" :class={noborder:border,opacity0:opacity&&index!=items.length-1} :style="styles(index+1)"></div>
+			</div>
+			<div class="box">
+				<div class="item" v-for="(item,index) in items" :class={hui:!item,noborder:border} :style="styles(item)" @click="moveFn(index)" @touchstart="moveFn(index)" ref="li"></div>
+			</div>
+			<span>累计时间:</span><span v-text="time"></span> <span v-text="timeTitle" class="num"></span> <a href="#" @click.prevent="reset()" @touchstart.prevent="reset()" v-text="aBtn"></a>
+		</div>	
+		 
+    <div id="musicd">
+ 
+ 
+  
+  <div class="m_name">  
+        正在播放: <strong id="rmusic">{{todos[this.index_m].text}}</strong>  
+  </div>  
+ <div  class="btn-group" id="ctrl_area">
+   <div id="btn-play"  @click="playm()" @touchstart="playm()"  :class="{backpos:mp3}" >
+ 
+  </div>
+  <div id="btn-pre" @click="playprev()" >
+   </div>
+<div id="btn-next" @click="playnext()">
+  
+</div>
+ 
+  </div>
+
+	</div>
+     <audio id="mcont" controls :src="mpath" ref="maudio"  autoplay="autoplay">
+     你的浏览器不支持audio标签
+    </audio>
+  </div>
+ 
+	<script src="puzzleGame/js/vue.min.js"></script>
+	<script src="puzzleGame/js/script.min.js"></script>
+</body>
+</html>
